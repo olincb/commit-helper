@@ -1,6 +1,7 @@
 import asyncio
 import os
 
+import rich
 import rich_click as click
 
 from . import commit
@@ -18,4 +19,5 @@ def main(openai_key: str | None):
 
     if openai_key:
         os.environ["OPENAI_API_KEY"] = openai_key
+    rich.print("Generating commit message...")
     asyncio.run(commit.co_mit())
