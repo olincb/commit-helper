@@ -22,20 +22,12 @@ pip install co-mit
 ## Usage
 
 ```console
-cmt
-```
-
-```console
 cmt --help
 ```
 
-```console
-co-mit --help
-```
-
-```console
-co-mit
-```
+1. Set the `OPENAI_API_KEY` environment variable to your OpenAI API key.
+2. Navigate to the root of your git repository.
+3. Run `cmt` or `co-mit` to generate a commit message.
 
 ## License
 

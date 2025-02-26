@@ -1,8 +1,10 @@
-__all__ = ['diff']
+__all__ = ["diff"]
 import subprocess
 
+
 def diff():
-    return subprocess.check_output(['git', 'diff'], text=True)
+    return subprocess.check_output(["git", "diff"], text=True)
+
 
 def status():
-    return subprocess.check_output(['git', 'status'], text=True)
+    return subprocess.check_output(["git", "status"], text=True)
