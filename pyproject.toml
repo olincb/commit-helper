@@ -1,0 +1,69 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cmt"
+dynamic = ["version"]
+description = 'help with commits!'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = ["commit", "helper", "git", "ai", "generative"]
+authors = [
+  { name = "Christopher Baillie Olin", email = "chris.baillie.olin@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "rich-click",
+  "llama-index",
+]
+
+[project.optional-dependencies]
+dev = [
+  "python-dotenv",
+  "ruff",
+]
+
+[project.urls]
+Documentation = "https://github.com/olincb/commit-helper#readme"
+Source = "https://github.com/olincb/commit-helper"
+
+[tool.hatch.version]
+path = "src/cmt/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/cmt tests}"
+
+[tool.coverage.run]
+source_pkgs = ["cmt", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/cmt/__about__.py",
+]
+
+[tool.coverage.paths]
+cmt = ["src/cmt", "*/cmt/src/cmt"]
+tests = ["tests", "*/cmt/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
