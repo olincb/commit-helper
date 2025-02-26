@@ -4,6 +4,7 @@ __pycache__/
 *.egg-info/
 *.egg
 .ipynb_checkpoints
+.ruff_cache/
 .env
 .venv
 env/

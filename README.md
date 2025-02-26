@@ -9,7 +9,9 @@ helps with commits!
 ## Table of Contents
 
 - [Installation](#installation)
+- [Usage](#usage)
 - [License](#license)
+- [Development](#development)
 
 ## Installation
 
