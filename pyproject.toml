@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "cmt"
+name = "co-mit"
 dynamic = ["version"]
 description = 'help with commits!'
 readme = "README.md"
@@ -40,26 +40,26 @@ Documentation = "https://github.com/olincb/commit-helper#readme"
 Source = "https://github.com/olincb/commit-helper"
 
 [tool.hatch.version]
-path = "src/cmt/__about__.py"
+path = "src/co_mit/__about__.py"
 
 [tool.hatch.envs.types]
 extra-dependencies = [
   "mypy>=1.0.0",
 ]
 [tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/cmt tests}"
+check = "mypy --install-types --non-interactive {args:src/co_mit tests}"
 
 [tool.coverage.run]
-source_pkgs = ["cmt", "tests"]
+source_pkgs = ["co_mit", "tests"]
 branch = true
 parallel = true
 omit = [
-  "src/cmt/__about__.py",
+  "src/co_mit/__about__.py",
 ]
 
 [tool.coverage.paths]
-cmt = ["src/cmt", "*/cmt/src/cmt"]
-tests = ["tests", "*/cmt/tests"]
+co-mit = ["src/co_mit", "*/co_mit/src/co_mit"]
+tests = ["tests", "*/co_mit/tests"]
 
 [tool.coverage.report]
 exclude_lines = [

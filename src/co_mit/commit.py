@@ -1,6 +1,6 @@
-__all__ = ["cmt"]
+__all__ = ["co_mit"]
 
 
-def cmt():
+def co_mit():
     print("hello world")
     return 100
