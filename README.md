@@ -17,6 +17,24 @@ helps with commits!
 pip install co-mit
 ```
 
+## Usage
+
+```console
+cmt
+```
+
+```console
+cmt --help
+```
+
+```console
+co-mit --help
+```
+
+```console
+co-mit
+```
+
 ## License
 
 `co-mit` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.

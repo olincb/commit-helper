@@ -36,6 +36,11 @@ dev = [
   "ruff",
 ]
 
+[project.scripts]
+co-mit = "co_mit.cli:main"
+co_mit = "co_mit.cli:main"
+cmt = "co_mit.cli:main"
+
 [project.urls]
 Documentation = "https://github.com/olincb/commit-helper#readme"
 Source = "https://github.com/olincb/commit-helper"
