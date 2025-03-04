@@ -13,6 +13,6 @@ def read_file(file_path: str) -> str:
 
     """
     if not config.Config.quiet:
-        rich.print(f"Reading file at {file_path}")
+        rich.print(f"Reading file at [bold magenta]{file_path}[/]")
     with open(file_path, "r") as file:
         return file.read()

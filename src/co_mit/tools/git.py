@@ -12,7 +12,7 @@ def diff() -> str:
 
     """
     if not config.Config.quiet:
-        rich.print("running `git diff`")
+        rich.print("running [bold magenta]git diff[/]")
     return subprocess.check_output(["git", "diff"], text=True)
 
 
@@ -23,7 +23,7 @@ def diff_cached() -> str:
 
     """
     if not config.Config.quiet:
-        rich.print("running `git diff --chached`")
+        rich.print("running [bold magenta]git diff --chached[/]")
     return subprocess.check_output(["git", "diff", "--cached"], text=True)
 
 
@@ -34,5 +34,5 @@ def status() -> str:
 
     """
     if not config.Config.quiet:
-        rich.print("running `git status`")
+        rich.print("running [bold magenta]git status[/]")
     return subprocess.check_output(["git", "status"], text=True)

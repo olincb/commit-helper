@@ -3,7 +3,7 @@ import llama_index.core.agent.workflow as llama_agent_workflow
 import llama_index.llms.openai
 import rich
 
-from . import tools
+from . import config, tools
 
 
 SYSTEM_PROMPT = """
@@ -36,4 +36,6 @@ def create_user_msg(example: str | None = None) -> str:
 async def co_mit(example: str | None = None) -> None:
     msg = create_user_msg(example)
     result = await commit_agent.run(user_msg=msg)
+    if not config.Config.quiet:
+        rich.print("[bold green]Done.[/]")
     rich.print(str(result))

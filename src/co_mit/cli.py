@@ -1,3 +1,4 @@
+import rich
 import rich_click as click
 
 
@@ -42,7 +43,7 @@ def main(
     if quiet:
         config.Config.quiet = quiet
     else:
-        click.echo("Generating commit message...")
+        rich.print("[bold yellow]Generating commit message...[/]")
 
     # Lazy imports to speed up --help and --version
     import asyncio
