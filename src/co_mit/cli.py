@@ -32,7 +32,9 @@ from . import commit, config
     is_flag=True,
     help="Show version information.",
 )
-def main(openai_key: str | None, example: str | None, quiet: bool, version: bool) -> None:
+def main(
+    openai_key: str | None, example: str | None, quiet: bool, version: bool
+) -> None:
     """Helps with git commits."""
 
     if version:
