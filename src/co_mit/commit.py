@@ -1,65 +1,39 @@
 __all__ = ["co_mit"]
-import llama_index.core.workflow
+import llama_index.core.agent.workflow as llama_agent_workflow
 import llama_index.llms.openai
 import rich
 
-from . import git
+from . import tools
 
 
-COMMIT_PROMPT = """
-Write a commit message for the following changes.
-{format_instructions}
-
-The git diff:
-```diff
-{diff}
-```
-
-The git status:
-```console
-{status}
-```
-
+SYSTEM_PROMPT = """
+You are an experienced software developer working on a project.
+You have made some changes to the codebase and you need to write a commit message to describe the changes you have made.
 """
 
 
-class CommitEvent(llama_index.core.workflow.Event):
-    msg: str
+commit_agent = llama_agent_workflow.AgentWorkflow.from_tools_or_functions(
+    [
+        tools.git.diff,
+        tools.git.diff_cached,
+        tools.git.status,
+        tools.os.read_file,
+    ],
+    llm=llama_index.llms.openai.OpenAI(model="gpt-4o"),
+    system_prompt=SYSTEM_PROMPT,
+)
 
 
-class CommitFlow(llama_index.core.workflow.Workflow):
-    llm = llama_index.llms.openai.OpenAI(model="o1-mini")
-
-    @llama_index.core.workflow.step
-    async def generate_commit(
-        self,
-        ctx: llama_index.core.workflow.Context,
-        ev: llama_index.core.workflow.StartEvent,
-    ) -> CommitEvent:
-        if ev.example:
-            format_instructions = f"\nExample commit message:\n```\n{ev.example}\n```"
-        else:
-            format_instructions = "Follow the conventional commit message format."
-
-        prompt = COMMIT_PROMPT.format(
-            diff=git.diff(),
-            status=git.status(),
-            format_instructions=format_instructions,
-        )
-        response = await self.llm.acomplete(prompt)
-        return CommitEvent(msg=str(response))
-
-    @llama_index.core.workflow.step
-    async def second_step(self, ev: CommitEvent) -> llama_index.core.workflow.StopEvent:
-        # TODO: further refinement
-        return llama_index.core.workflow.StopEvent(result=ev.msg)
+def create_user_msg(example: str | None = None) -> str:
+    if not example:
+        msg = "Create a commit message using conventional commit format."
+    else:
+        msg = f"Create a commit message using this format:\n'''{example}\n'''"
+    msg += "\nYou should return only the commit message, without additional information, backticks, quotes, or any other formatting."
+    return msg
 
 
 async def co_mit(example: str | None = None) -> None:
-    commit_flow = CommitFlow(timeout=60, verbose=False)
-    handler = commit_flow.run(example=example)
-    async for event in handler.stream_events():
-        if isinstance(event, CommitEvent):
-            rich.print(event.msg)
-    result = await handler
+    msg = create_user_msg(example)
+    result = await commit_agent.run(user_msg=msg)
     rich.print(str(result))
