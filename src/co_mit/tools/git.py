@@ -2,6 +2,8 @@ __all__ = ["diff", "diff_cached", "status"]
 import subprocess
 import rich
 
+from .. import config
+
 
 def diff() -> str:
     """Return the `git diff` as a string.
@@ -9,7 +11,8 @@ def diff() -> str:
     Helpful for seeing all unstaged changes.
 
     """
-    rich.print("running `git diff`")
+    if not config.Config.quiet:
+        rich.print("running `git diff`")
     return subprocess.check_output(["git", "diff"], text=True)
 
 
@@ -19,7 +22,8 @@ def diff_cached() -> str:
     Helpful for seeing all staged changes.
 
     """
-    rich.print("running `git diff --chached`")
+    if not config.Config.quiet:
+        rich.print("running `git diff --chached`")
     return subprocess.check_output(["git", "diff", "--cached"], text=True)
 
 
@@ -29,5 +33,6 @@ def status() -> str:
     Helpful for seeing a summary of staged and unstaged changes.
 
     """
-    rich.print("running `git status`")
+    if not config.Config.quiet:
+        rich.print("running `git status`")
     return subprocess.check_output(["git", "status"], text=True)

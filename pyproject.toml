@@ -28,6 +28,7 @@ classifiers = [
 dependencies = [
   "rich-click",
   "llama-index",
+  "pydantic-settings",
 ]
 
 [project.optional-dependencies]
