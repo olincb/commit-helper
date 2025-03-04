@@ -24,18 +24,21 @@ pip install co-mit
 ## Usage
 
 ```console
-$ cmt --help
+ » co-mit --help
 
- Usage: cmt [OPTIONS]
+ Usage: co-mit [OPTIONS]
 
  Helps with git commits.
 
-╭─ Options ─────────────────────────────────────────────────────────────────╮
-│ --openai-key  -k  TEXT  OpenAI API key. Can also set with OPENAI_API_KEY  │
-│                         environment variable.                             │
-│ --example     -e  TEXT  Example input to generate a commit message from.  │
-│ --help                  Show this message and exit.                       │
-╰───────────────────────────────────────────────────────────────────────────╯
+╭─ Options ───────────────────────────────────────────────────────────────────╮
+│ --openai-key  -k  TEXT  OpenAI API key. Can also set with OPENAI_API_KEY    │
+│                         environment variable.                               │
+│ --example     -e  TEXT  Example input to generate a commit message from.    │
+│ --quiet       -q        Suppress all output other than final commit         │
+│                         message. Useful for scripting. Can also set with    │
+│                         CO_MIT_QUIET environment variable.                  │
+│ --help                  Show this message and exit.                         │
+╰─────────────────────────────────────────────────────────────────────────────╯
 ```
 
 1. Set the `OPENAI_API_KEY` environment variable to your OpenAI API key.
@@ -45,7 +48,8 @@ $ cmt --help
 ```console
 $ co-mit
 Generating commit message...
-'''
+running `git status`
+running `git diff`
 feat(cli): add `--example` option for generating commit messages
 
 - Introduce the `--example (-e)` option to allow users to provide example
@@ -56,7 +60,6 @@ commit flow.
 instructions.
 - Improve the README with detailed usage instructions and examples, including
 the new `--example` option.
-'''
 ```
 
 ## License
