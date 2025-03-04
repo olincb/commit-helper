@@ -54,4 +54,4 @@ def main(
         config.Config.example = example
     if openai_api_key:
         config.Config.openai_api_key = openai_api_key
-    asyncio.run(commit.co_mit(example))
+    asyncio.run(commit.co_mit())
