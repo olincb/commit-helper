@@ -1,10 +1,4 @@
-import asyncio
-import os
-
-import rich
 import rich_click as click
-
-from . import commit, config
 
 
 @click.command()
@@ -43,10 +37,18 @@ def main(
         click.echo(f"co-mit version {__about__.__version__}")
         return
 
-    if openai_key:
-        os.environ["OPENAI_API_KEY"] = openai_key
+    # Echo before lazy importing to speed up initial message
+    from . import config
     if quiet:
         config.Config.quiet = quiet
     else:
-        rich.print("Generating commit message...")
+        click.echo("Generating commit message...")
+
+    # Lazy imports to speed up --help and --version
+    import asyncio
+    import os
+    from . import commit
+
+    if openai_key:
+        os.environ["OPENAI_API_KEY"] = openai_key
     asyncio.run(commit.co_mit(example))
