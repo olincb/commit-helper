@@ -13,6 +13,8 @@ def read_file(file_path: str) -> str:
     Helpful when additional source code is required for a particular file,
     outside of what is included in the `git diff`.
 
+    Required when committing untracked files, and their contents don't appear in the `git diff`.
+
     """
     if not config.Config.quiet:
         rich.print(f"Reading file at [bold magenta]{file_path}[/]")

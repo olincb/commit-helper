@@ -23,7 +23,7 @@ def diff_cached() -> str:
 
     """
     if not config.Config.quiet:
-        rich.print("Running [bold magenta]git diff --chached[/]")
+        rich.print("Running [bold magenta]git diff --cached[/]")
     return subprocess.check_output(["git", "diff", "--cached"], text=True)
 
 
