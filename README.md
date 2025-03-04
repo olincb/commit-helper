@@ -70,3 +70,31 @@ To install `co-mit` along with the tools you need to develop and run tests, run 
 ```console
 uv pip install -e .[dev]
 ```
+
+### Running co_mit
+
+After installing the package, you can run the CLI with:
+
+```console
+co-mit
+```
+
+To run with dotenv file:
+
+```console
+dotenv run -- co-mit
+```
+
+### Publishing
+
+To publish a new version to PyPI, update the version number with hatch:
+
+```console
+hatch version minor
+# or major, patch, etc.
+```
+
+Then push a tag or create a new release on GitHub.
+
+A GitHub Actions workflow will automatically publish the new version to PyPI
+when a new tag is pushed to the repository, or a new release is created.
