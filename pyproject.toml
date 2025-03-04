@@ -11,7 +11,7 @@ requires-python = ">=3.8"
 license = "MIT"
 keywords = ["commit", "helper", "git", "ai", "generative"]
 authors = [
-  { name = "Christopher Baillie Olin", email = "chris.baillie.olin@gmail.com" },
+  { name = "C.B. Olin", email = "chris.baillie.olin@gmail.com" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",

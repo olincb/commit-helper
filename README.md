@@ -12,6 +12,8 @@ helps with commits!
 - [Usage](#usage)
 - [License](#license)
 - [Development](#development)
+    - [Running co_mit](#running-co_mit)
+    - [Publishing](#publishing)
 
 ## Installation
 
