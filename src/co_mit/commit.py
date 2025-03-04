@@ -12,18 +12,6 @@ You have made some changes to the codebase and you need to write a commit messag
 """
 
 
-commit_agent = llama_agent_workflow.AgentWorkflow.from_tools_or_functions(
-    [
-        tools.git.diff,
-        tools.git.diff_cached,
-        tools.git.status,
-        tools.os.read_file,
-    ],
-    llm=llama_index.llms.openai.OpenAI(model="gpt-4o"),
-    system_prompt=SYSTEM_PROMPT,
-)
-
-
 def create_user_msg(example: str | None = None) -> str:
     if not example:
         msg = "Create a commit message using conventional commit format."
@@ -34,6 +22,18 @@ def create_user_msg(example: str | None = None) -> str:
 
 
 async def co_mit(example: str | None = None) -> None:
+    commit_agent = llama_agent_workflow.AgentWorkflow.from_tools_or_functions(
+        [
+            tools.git.diff,
+            tools.git.diff_cached,
+            tools.git.status,
+            tools.os.read_file,
+        ],
+        llm=llama_index.llms.openai.OpenAI(
+            model="gpt-4o", api_key=config.Config.openai_api_key
+        ),
+        system_prompt=SYSTEM_PROMPT,
+    )
     msg = create_user_msg(example)
     result = await commit_agent.run(user_msg=msg)
     if not config.Config.quiet:
