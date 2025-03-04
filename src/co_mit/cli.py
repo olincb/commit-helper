@@ -4,16 +4,16 @@ import rich_click as click
 
 @click.command()
 @click.option(
-    "--openai-key",
+    "--openai-api-key",
     "-k",
     type=click.STRING,
-    help="OpenAI API key. Can also set with OPENAI_API_KEY environment variable.",
+    help="OpenAI API key. Can also set with CO_MIT_OPENAI_API_KEY environment variable.",
 )
 @click.option(
     "--example",
     "-e",
     type=click.STRING,
-    help="Example input to generate a commit message from.",
+    help="Example input to generate a commit message from. Can also set with CO_MIT_EXAMPLE environment variable.",
 )
 @click.option(
     "--quiet",
@@ -28,7 +28,7 @@ import rich_click as click
     help="Show version information.",
 )
 def main(
-    openai_key: str | None, example: str | None, quiet: bool, version: bool
+    openai_api_key: str | None, example: str | None, quiet: bool, version: bool
 ) -> None:
     """Helps with git commits."""
 
@@ -40,6 +40,7 @@ def main(
 
     # Echo before lazy importing to speed up initial message
     from . import config
+
     if quiet:
         config.Config.quiet = quiet
     else:
@@ -47,9 +48,10 @@ def main(
 
     # Lazy imports to speed up --help and --version
     import asyncio
-    import os
     from . import commit
 
-    if openai_key:
-        os.environ["OPENAI_API_KEY"] = openai_key
+    if example:
+        config.Config.example = example
+    if openai_api_key:
+        config.Config.openai_api_key = openai_api_key
     asyncio.run(commit.co_mit(example))
