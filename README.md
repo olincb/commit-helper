@@ -24,7 +24,7 @@ pip install co-mit
 ## Usage
 
 ```console
- » co-mit --help
+ $ co-mit --help
 
  Usage: co-mit [OPTIONS]
 
@@ -45,22 +45,7 @@ pip install co-mit
 2. Navigate to the root of your git repository.
 3. Run `cmt` or `co-mit` to generate a commit message:
 
-```console
-$ co-mit
-Generating commit message...
-running `git status`
-running `git diff`
-feat(cli): add `--example` option for generating commit messages
-
-- Introduce the `--example (-e)` option to allow users to provide example
-input for commit message generation.
-- Update the CLI to handle the `--example` parameter and pass it to the
-commit flow.
-- Enhance the `CommitFlow` to incorporate example-based formatting
-instructions.
-- Improve the README with detailed usage instructions and examples, including
-the new `--example` option.
-```
+![Usage example](assets/example1.png)
 
 ## License
 
