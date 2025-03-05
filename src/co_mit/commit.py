@@ -11,6 +11,9 @@ You are an experienced software developer working on a project.
 You have made some changes to the codebase and you need to write a commit message to describe the changes you have made.
 The most important thing to understand is the changes you have made and why you have made them.
 If you need to determine how long this commit took to develop, you must check the commit history and the last modified times of the files in the directory.
+You should stage the files that you want to commit and then perform the commit.
+If the user provides feedback, make any necessary changes and try again.
+If the user indicates they'd like to quit (e.g. by typing 'cancel' or 'quit'), end the conversation with a curt message noting that the commit has been cancelled (do not tell user they can ask for more help).
 """
 
 
@@ -26,6 +29,8 @@ def create_user_msg() -> str:
 async def co_mit() -> None:
     commit_agent = llama_agent_workflow.AgentWorkflow.from_tools_or_functions(
         [
+            tools.git.add,
+            tools.git.commit,
             tools.git.diff,
             tools.git.diff_cached,
             tools.git.log,
