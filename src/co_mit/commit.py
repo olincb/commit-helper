@@ -7,21 +7,28 @@ from . import config, tools
 
 
 SYSTEM_PROMPT = """
-You are an experienced software developer working on a project.
-You have made some changes to the codebase and you need to write a commit message to describe the changes you have made.
-The most important thing to understand is the changes you have made and why you have made them.
-If you need to determine how long this commit took to develop, you must check the commit history and the last modified times of the files in the directory.
-You should stage the files that you want to commit and then perform the commit.
-If the user provides feedback, make any necessary changes and try again.
-If the user indicates they'd like to quit (e.g. by typing 'cancel' or 'quit'), end the conversation with a curt message noting that the commit has been cancelled (do not tell user they can ask for more help).
+## Background
+- You are an experienced software developer working on a project.
+- You have made some changes to the codebase and you need to write a commit message to describe the changes you have made.
+
+## Goal
+- The most important thing to understand is the changes you have made and why you have made them.
+- You must stage the files that you want to commit.
+- You must perform the commit.
+
+## Considerations
+- If the user indicates they'd like to quit (e.g. by typing 'cancel' or 'quit'), end the conversation with a curt message noting that the commit has been cancelled (do not tell user they can ask for more help).
+- If you need to determine how long this commit took to develop, you must check the commit history and the last modified times of the files in the directory.
+- If the user provides feedback, make any necessary changes and try again.
+- When done, simply say "Done." to end the conversation.
 """
 
 
 def create_user_msg() -> str:
     if not config.Config.example:
-        msg = "Create a commit message using conventional commit format."
+        msg = "Commit this code using conventional commit format for the message."
     else:
-        msg = f"Create a commit message using this format:\n'''{config.Config.example}\n'''"
+        msg = f"Commit this code using this format for the message:\n'''{config.Config.example}\n'''"
     msg += "\nYou should return only the commit message, without additional information, backticks, quotes, or any other formatting."
     return msg
 
@@ -46,6 +53,4 @@ async def co_mit() -> None:
 
     msg = create_user_msg()
     result = await commit_agent.run(user_msg=msg)
-    if not config.Config.quiet:
-        rich.print("[bold green]Done.[/]")
-    rich.print(str(result))
+    rich.print("[bold green]" + str(result) + "[/]")

@@ -68,9 +68,7 @@ def add(files: list[str]) -> str | None:
 
     """
     color_interleaved = [
-        f"[bold light_sky_blue1]{file}[/]"
-        if i % 2 == 0
-        else f"[bold gold1]{file}[/]"
+        f"[bold light_sky_blue1]{file}[/]" if i % 2 == 0 else f"[bold gold1]{file}[/]"
         for i, file in enumerate(files)
     ]
     rich.print(f"Request to run [bold magenta]git add [/]{' '.join(color_interleaved)}")
@@ -108,4 +106,4 @@ def commit(message: str) -> str | None:
     feedback = click.prompt('["Y/y/yes" or provide feedback]', type=str)
     if feedback.strip().lower() not in ["y", "yes"]:
         return feedback
-    subprocess.run(["git", "commit", "-m", f"'{message}'"])
+    subprocess.run(["git", "commit", "-m", message])
